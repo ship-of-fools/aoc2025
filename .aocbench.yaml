@@ -1,0 +1,11 @@
+version: 1
+author: shipoffools
+language: C
+dockerfile: .docker/Dockerfile
+code: /code
+workdir: /code/Day%zeroday%
+runonce: "rm -rf build && cmake . --preset=makefiles && cmake --build --preset=makefiles"
+cmd: build/Day%zeroday%
+daypath: Day%zeroday%
+inputfile: Day%zeroday%/input.txt
+answerfile: Day%zeroday%/answers.txt

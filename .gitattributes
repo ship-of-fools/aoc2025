@@ -1,0 +1,2 @@
+#pattern  filter=crypt diff=crypt merge=crypt
+*/input.txt  filter=crypt diff=crypt merge=crypt
