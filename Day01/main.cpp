@@ -1,5 +1,3 @@
-#define _GNU_SOURCE   // or _POSIX_C_SOURCE >= 200809L
-#define _POSIX_C_SOURCE 200809L
 #include <fcntl.h>
 #include <sys/mman.h>
 #include <sys/stat.h>
