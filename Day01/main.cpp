@@ -14,7 +14,40 @@ int mod(int a, int b) {
     return r < 0 ? r + b : r;
 }
 
+
 std::pair<int, int> turn_dial(int dial, bool left, int number, int &p1){
+    int res = 0;
+    int clicks = 0;
+    if (dial == 0 && left){
+        clicks = -1;
+    }
+
+
+    if (left == true){
+        res = dial - number;
+        while (res < 0) {
+            res += 100;
+            clicks++;
+        }
+    } else {
+        res = dial + number;
+        while (res >= 100) {
+            res -= 100;
+            clicks++;
+        }
+    }
+    if (res == 0){
+        p1 += 1;
+       if (left == 1){
+            clicks += 1;
+        }
+        
+    }
+    dial = res;
+    return {dial, clicks};
+}
+
+std::pair<int, int> turn_dial_slow(int dial, bool left, int number, int &p1){
     int res = 0;
     int clicks = 0;
     if (left == true){
@@ -61,16 +94,17 @@ std::pair<int, int> turn_dial(int dial, bool left, int number, int &p1){
 // void test(int dial, bool left, int number, int expected_dial, int expected_clicks){
 //     int add_p1 = 0;
 //     auto [new_dial, new_clicks] = turn_dial(dial, left, number, add_p1);
-    
-//     std::cout << "dial_start: " << dial << ", turn: " << (left ? 'L' : 'R') << number << ", dial_end: " << new_dial
-//     << ", expected dial_end: " << expected_dial << ", clicks: " << new_clicks << ", expected clicks: " << expected_clicks;
+
+//     printf("dial_start: %d, turn: %c%d, dial_end: %d, expected dial_end: %d, clicks: %d, expected clicks: %d",
+//            dial, (left ? 'L' : 'R'), number, new_dial, expected_dial, new_clicks, expected_clicks);
+
 //     if (new_dial == expected_dial && new_clicks == expected_clicks){
-//         std::cout << " PASSED!\n";
+//         printf(" PASSED!\n");
 //     } else {
-//         std::cout << " FAILED!\n";
+//         printf(" FAILED!\n");
 //     }
-    
 // }
+
 
 int main() {
     int fd = open("input.txt", O_RDONLY);
