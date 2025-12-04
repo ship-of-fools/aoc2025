@@ -1,11 +1,15 @@
+#define _GNU_SOURCE   // or _POSIX_C_SOURCE >= 200809L
+#define _POSIX_C_SOURCE 200809L
 #include <fcntl.h>
 #include <sys/mman.h>
 #include <sys/stat.h>
 #include <unistd.h>
-#include <iostream>
+// #include <iostream>
 #include <string_view>
 #include <cstdint>
+#include <cstdio>
 #include <charconv>
+#include <cstdlib>
 
 int mod(int a, int b) {
     int r = a % b;
@@ -56,19 +60,19 @@ std::pair<int, int> turn_dial(int dial, bool left, int number, int &p1){
     return {dial, clicks};
 }
 
-void test(int dial, bool left, int number, int expected_dial, int expected_clicks){
-    int add_p1 = 0;
-    auto [new_dial, new_clicks] = turn_dial(dial, left, number, add_p1);
+// void test(int dial, bool left, int number, int expected_dial, int expected_clicks){
+//     int add_p1 = 0;
+//     auto [new_dial, new_clicks] = turn_dial(dial, left, number, add_p1);
     
-    std::cout << "dial_start: " << dial << ", turn: " << (left ? 'L' : 'R') << number << ", dial_end: " << new_dial
-    << ", expected dial_end: " << expected_dial << ", clicks: " << new_clicks << ", expected clicks: " << expected_clicks;
-    if (new_dial == expected_dial && new_clicks == expected_clicks){
-        std::cout << " PASSED!\n";
-    } else {
-        std::cout << " FAILED!\n";
-    }
+//     std::cout << "dial_start: " << dial << ", turn: " << (left ? 'L' : 'R') << number << ", dial_end: " << new_dial
+//     << ", expected dial_end: " << expected_dial << ", clicks: " << new_clicks << ", expected clicks: " << expected_clicks;
+//     if (new_dial == expected_dial && new_clicks == expected_clicks){
+//         std::cout << " PASSED!\n";
+//     } else {
+//         std::cout << " FAILED!\n";
+//     }
     
-}
+// }
 
 int main() {
     int fd = open("input.txt", O_RDONLY);
@@ -103,8 +107,9 @@ int main() {
         }
     }
     // munmap(data, len);
-    std::cout << "part1: " << part1 << std::endl;
-    std::cout << "part2: " << part2 << std::endl;
+
+    printf("part1: %d\n", part1);
+    printf("part2: %d\n", part2);
 
     // auto [test_dial, test_clicks] = turn_dial(50, 1, 50);
     // std::cout << test_dial << " " << test_clicks << std::endl;
