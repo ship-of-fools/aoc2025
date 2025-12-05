@@ -3,7 +3,7 @@
 #include <sys/stat.h>
 #include <unistd.h>
 // #include <iostream>
-#include <string_view>
+#include <utility>
 #include <cstdint>
 #include <cstdio>
 #include <charconv>
@@ -125,10 +125,10 @@ int main() {
     for (char* ptr = data; ptr < end; ++ptr) {
         if (*ptr == '\n' || ptr == end - 1) {
             size_t line_length = ptr - line_start + (*ptr != '\n' ? 1 : 0); // include last char if no '\n'
-            std::string_view line(line_start, line_length);
+            // std::string_view line(line_start, line_length);
 
             int number;
-            auto result = std::from_chars(line.data()+1, line.data() + line.size(), number);
+            auto result = std::from_chars(line_start+1, line_start + line_length, number);
 
             int add_p1 = 0;
             auto [new_dial, new_clicks] = turn_dial(dial, *line_start == 'L', number, add_p1);
