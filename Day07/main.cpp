@@ -3,7 +3,7 @@
 #include <vector>
 #include <string>
 #include <unordered_map>
-#include <set>
+#include <unordered_set>
 
 // Custom hash for pair<int,int>
 struct PairHash {
@@ -20,7 +20,7 @@ int last_col_idx;
 std::unordered_map<std::pair<int,int>, long long, PairHash> memo;
 
 // Track used splitters
-std::set<std::pair<int,int>> used_splitter_ids;
+std::unordered_set<std::pair<int,int>, PairHash> used_splitter_ids;
 
 long long do_recursion(int row, int col, long long splits = 0) {
     auto key = std::make_pair(row,col);
