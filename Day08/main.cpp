@@ -11,6 +11,11 @@
 #include <cmath>
 #include <algorithm>
 
+// #define TIME_IT
+#ifdef TIME_IT
+#include <chrono>
+#endif
+
 struct Pos {
     uint64_t x;
     uint64_t y;
@@ -26,7 +31,7 @@ uint64_t distance(Pos &a, Pos &b){
     uint64_t y = a.y - b.y;
     uint64_t z = a.z - b.z;
     uint64_t result = x*x + y*y + z*z;
-    result = std::sqrt(result);
+    // result = std::sqrt(result);
     return result;
 }
 
@@ -136,6 +141,11 @@ void print_point_pair(Pos &a, Pos &b){
 
 
 int main() {
+
+    #ifdef TIME_IT
+    auto timer_start = std::chrono::high_resolution_clock::now();
+    #endif
+
     std::ifstream file("input.txt");
     std::vector<std::string> lines;
     std::string line;
@@ -249,6 +259,12 @@ int main() {
     // merge_circuits(circuits, pid.p1, pid.p2);
     // print_circuits(circuits);
 
+    #ifdef TIME_IT
+    auto timer_end = std::chrono::high_resolution_clock::now();
+    // Duration in microseconds
+    auto timer_duration = std::chrono::duration_cast<std::chrono::microseconds>(timer_end - timer_start);
+    printf("time: %ld us\n", timer_duration.count());
+    #endif
 
     
 }
